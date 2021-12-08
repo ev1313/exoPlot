@@ -570,7 +570,6 @@ def test():
 
 def runPlotHabitble():
     RV_list, transit_list = readInHabitable()
-    pdb.set_trace()
     RV_outlist = []
     transit_outlist = []
     #print RV_list
@@ -578,7 +577,7 @@ def runPlotHabitble():
     i=0
     for planet in RV_list:
         if len(planet) != 98:
-            print(f"WARNING: planet list has invalid length, skipping {i}")
+            print(f"WARNING: planet list in RV_list has invalid length {len(planet)}, skipping {i}")
             continue
         #print calculateEffectiveFluxOnPlanet(planet)
         RV_outlist.append([planet[0],
@@ -587,12 +586,17 @@ def runPlotHabitble():
             float(planet[MASS])*MASS_CORRECTION_FACTOR])
         i+=1
 
+    i=0
     for planet in transit_list:
+        if len(planet) != 98:
+            print(f"WARNING: planet list in transit_list has invalid length {len(planet)}, skipping {i}")
+            continue
         #print calculateEffectiveFluxOnPlanet(planet)
         transit_outlist.append([planet[0][1:],
             calculateEffectiveFluxOnPlanet(planet),
             float(planet[STAR_T]),
             float(planet[RADIUS])*RADIUS_CORRECTION_FACTOR])
+        i+=1
     #print RV_outlist
     #print transit_outlist
 
