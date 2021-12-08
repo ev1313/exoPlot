@@ -9,13 +9,13 @@ Created on Sat Sep 30 15:21:24 2017
 import math
 import matplotlib.patches as mpatches
 from matplotlib import pyplot as plt
-
+import pdb
 
 ##############################################################################
 ###### CONSTANTS #############################################################
 ##############################################################################
 DETECTION_METHODS = ["astrometry", "microlensing", "pulsar", "transit", "imaging",
-                     "other", "radialVelocity", "TTV"]
+        "other", "radialVelocity", "TTV"]
 RA = 69  # index of right ascension
 DEC = 70  # index of declination
 MASS = 2  # index of planet mass
@@ -45,11 +45,11 @@ OLIVE = "#808000"
 COLOR_LIST = [RED, YELLOW, LIME, AQUA, BLUE, MAROON, PURPLE, OLIVE]
 ##############################################################################
 abnormal_star_list = ['55 Cnc','EPIC 211391664','HD 3167','HD 3167','EPIC 211089792',
-                    'K2-97','KELT-16','HD 185603','Kepler-1651 A','Kepler-1319 A',
-                    'Kepler-1649','KIC 9663113','Kepler-459','KOI-3791','KOI-3791',
-                    'Kepler-64 (AB)','Kepler-86','WASP-103','WASP-47','WASP-98',
-                    'XO-1','XO-2N','2M 2236+4751','51 Eri','51 Peg',' HD 1237 b',      
-                    'HD 179949','HD 59686 A','YZ Cet']
+        'K2-97','KELT-16','HD 185603','Kepler-1651 A','Kepler-1319 A',
+        'Kepler-1649','KIC 9663113','Kepler-459','KOI-3791','KOI-3791',
+        'Kepler-64 (AB)','Kepler-86','WASP-103','WASP-47','WASP-98',
+        'XO-1','XO-2N','2M 2236+4751','51 Eri','51 Peg',' HD 1237 b',      
+        'HD 179949','HD 59686 A','YZ Cet']
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -92,12 +92,12 @@ def readInHabitable():
 def findIndex():
     inputDict = readIn()
     titleList = inputDict["pulsar"][0]
-    print titleList.index("ra")
-    print titleList.index("dec")
-    print titleList.index("mass")
-    print titleList.index("radius")
-    print titleList.index("star_distance")
-    print titleList
+    #print titleList.index("ra")
+    #print titleList.index("dec")
+    #print titleList.index("mass")
+    #print titleList.index("radius")
+    #print titleList.index("star_distance")
+    #print titleList
 
 
 ########################################################################
@@ -111,14 +111,14 @@ def exoPlot(dataDict,title):
             title: title of the output plot
     """
     color_dict = {'astrometry': PURPLE,
-                  'microlensing': LIME,
-                  'pulsar': OLIVE,
-                  'transit': RED,
-                  'imaging':YELLOW,
-                  'other': AQUA,
-                  'radialVelocity': BLUE,
-                  'TTV': MAROON
-                  }
+            'microlensing': LIME,
+            'pulsar': OLIVE,
+            'transit': RED,
+            'imaging':YELLOW,
+            'other': AQUA,
+            'radialVelocity': BLUE,
+            'TTV': MAROON
+            }
     count = 0
     plt.figure(figsize=(65, 30))  # figure size to be determined
     plt.title(title, fontsize = 50)
@@ -140,14 +140,14 @@ def exoPlot(dataDict,title):
     #                       yellow_patch,aqua_patch,blue_patch,maroon_patch],
     #           loc='center left', bbox_to_anchor=(1, 0.5),fontsize=40)
     plt.legend(handles=[red_patch,blue_patch],
-               loc='center left', bbox_to_anchor=(1, 0.5),fontsize=40)
+            loc='center left', bbox_to_anchor=(1, 0.5),fontsize=40)
     #leng = 0
     for method in dataDict:
         clr = color_dict[method]
         coordinateList  = dataDict[method]
         #leng += len(coordinateList[0])
         plt.plot(coordinateList[0], coordinateList[1], 'o',
-                 markersize = 30, color = clr)
+                markersize = 30, color = clr)
         count += 1
     filename = "plot/" + title + '.eps'
     plt.savefig(filename)
@@ -166,7 +166,7 @@ def effectiveFluxPlot(planet_list, bline_list, title):
     bline_y = bline_list[0]
     inline_x = bline_list[1]
     outline_x = bline_list[2]
-    
+
     plt.figure(figsize=(65, 30))  # figure size to be determined
     plt.title(title, fontsize = 50)
     plt.xlabel("Effective Flux Incident on the Planet", fontsize = 50)
@@ -192,14 +192,14 @@ def getRaDec(inputDict):
     """ Reads in a dictionary in the style of output dictionary of readIn,
     and extracts the right ascension and declination information from it. """
     outputDict = {"astrometry":[[],[]],
-                  "microlensing":[[],[]],
-                  "pulsar":[[],[]],
-                  "transit":[[],[]],
-                  "imaging":[[],[]],
-                  "other":[[],[]],
-                  "radialVelocity":[[],[]],
-                  "TTV":[[],[]]
-                  }
+            "microlensing":[[],[]],
+            "pulsar":[[],[]],
+            "transit":[[],[]],
+            "imaging":[[],[]],
+            "other":[[],[]],
+            "radialVelocity":[[],[]],
+            "TTV":[[],[]]
+            }
     for method in DETECTION_METHODS:
         infoList = inputDict[method]
         for planetInfo in infoList:
@@ -230,14 +230,14 @@ def getEarthLike(inputDict):
         (2) M < 10Me
     """
     outputDict = {"astrometry":[[],[]],
-              "microlensing":[[],[]],
-              "pulsar":[[],[]],
-              "transit":[[],[]],
-              "imaging":[[],[]],
-              "other":[[],[]],
-              "radialVelocity":[[],[]],
-              "TTV":[[],[]]
-              }
+            "microlensing":[[],[]],
+            "pulsar":[[],[]],
+            "transit":[[],[]],
+            "imaging":[[],[]],
+            "other":[[],[]],
+            "radialVelocity":[[],[]],
+            "TTV":[[],[]]
+            }
     for method in DETECTION_METHODS:
         infoList = inputDict[method]
         for planetInfo in infoList:
@@ -269,8 +269,7 @@ def getEarthLike(inputDict):
 #                    print radius
 #                    print ra
 #                    print dec
-                if radius != '' and mass != '' and radius < 2.0 and mass < 10.0 \
-                and ra != '' and dec != '':
+                if radius != '' and mass != '' and radius < 2.0 and mass < 10.0 and ra != '' and dec != '':
                     outputDict[method][0].append(ra)
                     outputDict[method][1].append(dec)
     return outputDict
@@ -278,14 +277,14 @@ def getEarthLike(inputDict):
 
 def getWithin10pc(inputDict):
     outputDict = {"astrometry":[[],[]],
-                  "microlensing":[[],[]],
-                  "pulsar":[[],[]],
-                  "transit":[[],[]],
-                  "imaging":[[],[]],
-                  "other":[[],[]],
-                  "radialVelocity":[[],[]],
-                  "TTV":[[],[]]
-                  }
+            "microlensing":[[],[]],
+            "pulsar":[[],[]],
+            "transit":[[],[]],
+            "imaging":[[],[]],
+            "other":[[],[]],
+            "radialVelocity":[[],[]],
+            "TTV":[[],[]]
+            }
     for method in DETECTION_METHODS:
         infoList = inputDict[method]
         for planetInfo in infoList:
@@ -319,14 +318,14 @@ def getHabitableZonePlanets(inputDict):
     """ Reads in a dictionary in the style of output dictionary of readIn,
     and extracts the right ascension and declination information from it. """
     outputDict = {"astrometry":[[],[]],
-                  "microlensing":[[],[]],
-                  "pulsar":[[],[]],
-                  "transit":[[],[]],
-                  "imaging":[[],[]],
-                  "other":[[],[]],
-                  "radialVelocity":[[],[]],
-                  "TTV":[[],[]]
-                  }
+            "microlensing":[[],[]],
+            "pulsar":[[],[]],
+            "transit":[[],[]],
+            "imaging":[[],[]],
+            "other":[[],[]],
+            "radialVelocity":[[],[]],
+            "TTV":[[],[]]
+            }
     for method in DETECTION_METHODS:
         infoList = inputDict[method]
         for planetInfo in infoList:
@@ -356,7 +355,7 @@ def getHabitableZonePlanets(inputDict):
                 assert dec > -90 and dec < 90
                 if inHabitableZone(star_radius, star_Teff, planet_a, star_mass, orbital_period) and ra != -1:
                     if isEarthLike(mass, radius):
-                        print planet_name
+                        #print planet_name
                         outputDict[method][0].append(ra)
                         outputDict[method][1].append(dec)
     return outputDict
@@ -449,7 +448,7 @@ def calculateDistance(Teff, R):
     A_OUT = 5.3221E-5
     B_OUT = 1.4288E-9
     C_OUT = -1.1049E-12
-    
+
     T = Teff - 5780
     Seff_in = SUN_IN + A_IN*T + B_IN*(T**2) + C_IN*(T**3)
     Seff_out = SUN_OUT + A_OUT*T + B_OUT*(T**2) + C_OUT*(T**3)
@@ -469,7 +468,7 @@ def calculateEffectiveFluxBoundary(Teff):
     A_OUT = 5.3221E-5
     B_OUT = 1.4288E-9
     C_OUT = -1.1049E-12
-    
+
     T = Teff - 5780
     Seff_in = SUN_IN + A_IN*T + B_IN*(T**2) + C_IN*(T**3)
     Seff_out = SUN_OUT + A_OUT*T + B_OUT*(T**2) + C_OUT*(T**3)
@@ -489,7 +488,7 @@ def calculateEffectiveFluxOnPlanet(inlist):
     #print Teff
     #print R
     #print a
-    
+
     lum = calculateLuminosity(Teff, R)
     Seff = lum / a**2
     return Seff
@@ -507,7 +506,7 @@ def calculateLuminosity(Teff, R):
     lumniosity = lumniosity/L_SUN
     #print lumniosity
     return lumniosity
-    
+
 
 def sumNumber(di):
     """ return the number of elements in a dictionary where all elements are
@@ -521,72 +520,82 @@ def sumNumber(di):
 ##############################################################################
 
 def testCalculateDistance():
-    print calculateDistance(5780, 1)
-    print calculateDistance(3000, 0.6)
-    print calculateDistance(3050, 0.141)
-    print calculateDistance(2550, 0.117)
-    print calculateDistance(5710, 0.17)
-    print calculateDistance(4723.0, 0.706)
-    print calculateDistance(4249.0, 0.56)
+    pass
+    #print calculateDistance(5780, 1)
+    #print calculateDistance(3000, 0.6)
+    #print calculateDistance(3050, 0.141)
+    #print calculateDistance(2550, 0.117)
+    #print calculateDistance(5710, 0.17)
+    #print calculateDistance(4723.0, 0.706)
+    #print calculateDistance(4249.0, 0.56)
 
 
 def testGetSemiMajorAxis():
-    print getSemiMajorAxis(365*0.24, 1)
-    print getSemiMajorAxis(365*0.62, 1)
-    print getSemiMajorAxis(365, 1)
-    print getSemiMajorAxis(365*1.88, 1)
-    print getSemiMajorAxis(4332, 1)
-    print getSemiMajorAxis(365*11.86, 1)
-    print getSemiMajorAxis(365*29.46, 1)
-    print getSemiMajorAxis(365*84.01, 1)
-    print getSemiMajorAxis(4.1876244, 1.272)  # expected 0.05511
-    print getSemiMajorAxis(34.94, 0.912)  # expected 0.2055
+    pass
+    #print getSemiMajorAxis(365*0.24, 1)
+    #print getSemiMajorAxis(365*0.62, 1)
+    #print getSemiMajorAxis(365, 1)
+    #print getSemiMajorAxis(365*1.88, 1)
+    #print getSemiMajorAxis(4332, 1)
+    #print getSemiMajorAxis(365*11.86, 1)
+    #print getSemiMajorAxis(365*29.46, 1)
+    #print getSemiMajorAxis(365*84.01, 1)
+    #print getSemiMajorAxis(4.1876244, 1.272)  # expected 0.05511
+    #print getSemiMajorAxis(34.94, 0.912)  # expected 0.2055
 
 
 def testInHabitableZone():
-    print inHabitableZone(1, 5780, 1, 1, 1)
-    print inHabitableZone(1, 5780, 2, 1, 1)
-    print inHabitableZone(1, 5780, 0.5, 1, 1)
-    print inHabitableZone(1, 5780, 0.8, 1, 1)
-    print inHabitableZone(1, 5780, 1.5, 1, 1)
-    print inHabitableZone(0.141, 3050, 0.04, 1, 1)
+    pass
+    #print inHabitableZone(1, 5780, 1, 1, 1)
+    #print inHabitableZone(1, 5780, 2, 1, 1)
+    #print inHabitableZone(1, 5780, 0.5, 1, 1)
+    #print inHabitableZone(1, 5780, 0.8, 1, 1)
+    #print inHabitableZone(1, 5780, 1.5, 1, 1)
+    #print inHabitableZone(0.141, 3050, 0.04, 1, 1)
 
 
 def testIndex():
     inputDict = readIn()
-    print inputDict["transit"][0][STAR_M]
-    print inputDict["transit"][0][ORBIT_P]
-    
-        
+    #print inputDict["transit"][0][STAR_M]
+    #print inputDict["transit"][0][ORBIT_P]
+
+
 def test():
     inputDict = readIn()
     habitableDict = getHabitableZonePlanets(inputDict)
-    print sumNumber(habitableDict)
+    #print sumNumber(habitableDict)
     #print habitableDict
     exoPlot(habitableDict, "Earth-sized Planets in Habitable Zone")
 
 
 def runPlotHabitble():
     RV_list, transit_list = readInHabitable()
+    pdb.set_trace()
     RV_outlist = []
     transit_outlist = []
     #print RV_list
     #print transit_list
+    i=0
     for planet in RV_list:
+        if len(planet) != 98:
+            print(f"WARNING: planet list has invalid length, skipping {i}")
+            continue
         #print calculateEffectiveFluxOnPlanet(planet)
         RV_outlist.append([planet[0],
-                           calculateEffectiveFluxOnPlanet(planet),
-                           float(planet[STAR_T]),
-                           float(planet[MASS])*MASS_CORRECTION_FACTOR])
+            calculateEffectiveFluxOnPlanet(planet),
+            float(planet[STAR_T]),
+            float(planet[MASS])*MASS_CORRECTION_FACTOR])
+        i+=1
+
     for planet in transit_list:
         #print calculateEffectiveFluxOnPlanet(planet)
         transit_outlist.append([planet[0][1:],
-                                calculateEffectiveFluxOnPlanet(planet),
-                                float(planet[STAR_T]),
-                                float(planet[RADIUS])*RADIUS_CORRECTION_FACTOR])
+            calculateEffectiveFluxOnPlanet(planet),
+            float(planet[STAR_T]),
+            float(planet[RADIUS])*RADIUS_CORRECTION_FACTOR])
     #print RV_outlist
     #print transit_outlist
-    
+
     boundary_line = [[], [], []]
     for i in range(2400, 6500):
         Sin, Sout = calculateEffectiveFluxBoundary(i)

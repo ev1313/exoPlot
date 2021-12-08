@@ -65,12 +65,12 @@ def readIn():
 def findIndex():
     inputDict = readIn()
     titleList = inputDict["pulsar"][0]
-    print titleList.index("ra")
-    print titleList.index("dec")
-    print titleList.index("mass")
-    print titleList.index("radius")
-    print titleList.index("star_distance")
-    print titleList
+    print(titleList.index("ra"))
+    print(titleList.index("dec"))
+    print(titleList.index("mass"))
+    print(titleList.index("radius"))
+    print(titleList.index("star_distance"))
+    print(titleList)
 
 
 def exoPlot(dataDict,title):
@@ -156,7 +156,7 @@ def getRaDec(inputDict):
                 except:
                     pass
 #                    print planetInfo[RA]
-    print "all " + str(leng)
+    print("all " + str(leng))
     return outputDict
 
 
@@ -212,7 +212,7 @@ def getEarthLike(inputDict):
                     outputDict[method][0].append(ra)
                     outputDict[method][1].append(dec)
                     leng += 1
-    print "earth size " + str(leng)
+    print("earth size " + str(leng))
     return outputDict
 
 
@@ -254,7 +254,7 @@ def getWithin10pc(inputDict):
 #                    print planetInfo[RA]
 #                    print planetInfo[DEC]
 #                    print planetInfo[DISTANCE]
-    print "<10pc " + str(leng)
+    print("<10pc " + str(leng))
     return outputDict
 
 
